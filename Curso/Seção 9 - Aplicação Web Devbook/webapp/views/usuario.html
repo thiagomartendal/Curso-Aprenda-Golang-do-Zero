@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ .Usuario.Nome }}</title>
+        <link href="/assets/css/bootstrap.css" type="text/css" rel="stylesheet" />
+        <style type="text/css">
+            a {
+                cursor: pointer;
+            }
+        </style>
+    </head>
+    <body>
+        {{ template "cabecalho" }}
+
+        {{ $SeguidoPeloUsuarioLogado := false }}
+        {{ range .Usuario.Seguidores }}
+            {{ if (eq .ID $.UsuarioLogadoID) }}
+                {{ $SeguidoPeloUsuarioLogado = true }}
+            {{ end }}
+        {{ end }}
+
+        <div class="container-fluid">
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Perfil do Usuário</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">
+                                {{ .Usuario.Nome }} - {{ .Usuario.Nick }} - Membro desde: {{ .Usuario.CriadoEm.Format "02/01/2006" }}
+                            </h6>
+                            <p class="card-text">
+                                <a href="" data-toggle="modal" data-target="#modal-seguidores">
+                                    Seguidores: {{ len .Usuario.Seguidores }}
+                                </a>
+                            </p>
+                            <p class="card-text">
+                                <a href="" data-toggle="modal" data-target="#modal-seguindo">
+                                    Seguindo: {{ len .Usuario.Seguindo }}
+                                </a>
+                            </p>
+                            <a class="card-link">
+                                {{ if $SeguidoPeloUsuarioLogado }}
+                                <button id="para-de-seguir" class="btn btn-info" data-usuario-id="{{ .Usuario.ID }}" onclick="pararDeSeguir('{{ .Usuario.ID }}')">Para de Seguir</button>
+                                {{ else }}
+                                <button id="seguir" class="btn btn-info" data-usuario-id="{{ .Usuario.ID }}" onclick="seguir('{{ .Usuario.ID }}')">Seguir</button>
+                                {{ end }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Publicações do Usuário</h5>
+                            <p class="card-text">
+                                {{ range .Usuario.Publicacoes }}
+                                    {{ template "publicacao-sem-permissao" . }}
+                                {{ else }}
+                                    <p class="text-muted text-center">
+                                        Não há publicações.
+                                    </p>
+                                {{ end }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{ template "modal-seguidores" .Usuario }}
+        {{ template "modal-seguindo" .Usuario }}
+        {{ template "rodape" }}
+        {{ template "scripts" }}
+        <script src="/assets/js/publicacoes.js" type="text/javascript"></script>
+        <script src="/assets/js/usuario.js" type="text/javascript"></script>
+    </body>
+</html>

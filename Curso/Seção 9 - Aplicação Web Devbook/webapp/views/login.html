@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login</title>
+        <link href="/assets/css/login.css" type="text/css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="container-login">
+            <div>
+                <form id="login" class="devbook-form" onsubmit="fazerLogin(event)">
+                    <span>Seja bem vindo!</span>
+                    <div>
+                        <input type="email" id="email" name="email" placeholder="Digite seu email" required />
+                    </div>
+                    <div>
+                        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required />
+                    </div>
+                    <input type="submit" class="btn-devbook" value="Entrar" />
+                    <a href="/criar-usuario">Clique aqui para abrir uma conta</a>
+                </form>
+            </div>
+        </div>
+        <script src="/assets/js/login.js" type="text/javascript"></script>
+    </body>
+</html>
