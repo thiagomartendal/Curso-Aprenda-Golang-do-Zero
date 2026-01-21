@@ -1,0 +1,9 @@
+{
+    "nome": "Nome 1",
+    "idade": 20,
+    "cursos": [
+        {
+            "nome": "Curso 1"
+        }
+    ]
+}

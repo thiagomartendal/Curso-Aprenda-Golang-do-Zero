@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Documento HTML</title>
+    </head>
+    <body>
+        <h1>Página HTML</h1>
+        <h2>{{.Nome}} - {{.Idade}}</h2>
+        <button id="botao">Clique</button>
+        <script>
+            let botao = document.getElementById("botao")
+
+            botao.onclick = () => {
+                alert("Botão clicado.")
+            }
+        </script>
+    </body>
+</html>
